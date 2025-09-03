@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Histórico de Chamados</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body onload="protegerPagina()" class="bg-gray-100 min-h-screen">
+  <div class="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-6 text-gray-700">Histórico de Chamados</h2>
+
+    <div class="overflow-x-auto">
+      <table class="w-full border border-gray-300 rounded-lg overflow-hidden">
+        <thead class="bg-gray-800 text-white">
+          <tr>
+            <th class="p-3 text-left">Cliente</th>
+            <th class="p-3 text-left">Endereço</th>
+            <th class="p-3 text-left">Número Residencial</th>
+            <th class="p-3 text-left">Número para Contato</th>
+            <th class="p-3 text-left">Problema</th>
+            <th class="p-3 text-left">Técnico</th>
+            <th class="p-3 text-left">Descrição</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaChamados" class="divide-y divide-gray-200"></tbody>
+      </table>
+    </div>
+
+    <a href="registro.html"
+       class="inline-block mt-6 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+      Voltar
+    </a>
+  </div>
+
+  <script>
+    const tabela = document.getElementById("tabelaChamados");
+    const chamados = JSON.parse(localStorage.getItem("chamados")) || [];
+
+    chamados.forEach(c => {
+      const row = `<tr class="hover:bg-gray-50">
+        <td class="p-3">${c.cliente}</td>
+        <td class="p-3">${c.endereco}</td>
+        <td class="p-3">${c.numeroCasa}</td>
+        <td class="p-3">${c.numeroCll}</td>
+        <td class="p-3">${c.problema}</td>
+        <td class="p-3">${c.tecnico}</td>
+        <td class="p-3">${c.descricao}</td>
+      </tr>`;
+      tabela.innerHTML += row;
+    });
+  </script>
+</body>
+
+</html>
